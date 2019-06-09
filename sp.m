@@ -1,0 +1,13 @@
+[audio, sampleRate] = audioread("sp04.wav");
+n = length(audio);
+echoFilter = zeros(501, 1);
+echoFilter(1) = 1;
+echoFilter(501) = 0.5;
+echo = conv(audio, echoFilter, "valid");
+audiowrite('sp04echo.wav', echo, sampleRate);
+audiowrite('sp04reverb11.wav', reverb(echo, 500, 0.25), sampleRate);
+audiowrite('sp04reverb12.wav', reverb(echo, 500, 0.5), sampleRate);
+audiowrite('sp04reverb13.wav', reverb(echo, 500, 0.9), sampleRate);
+audiowrite('sp04reverb21.wav', reverb(echo, 500, -0.25), sampleRate);
+audiowrite('sp04reverb22.wav', reverb(echo, 500, -0.5), sampleRate);
+audiowrite('sp04reverb23.wav', reverb(echo, 500, -0.9), sampleRate);
