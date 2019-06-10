@@ -1,7 +1,11 @@
 [audio, sampleRate] = audioread("car1.wav");
-specgram(audio, 256, sampleRate);
+%specgram(audio, 256, sampleRate);
 n = length(audio);
-%audiowrite('car2.wav', reverb(audio, 500, -0.4), sampleRate);
-%audiowrite('car2.wav', conv(audio, [0.2, 1.3, 0.5, 0.2], 'valid'), sampleRate);
-audiowrite('car2.wav', conv(audio, [1, -0.1], 'valid'), sampleRate);
-specgram(conv(audio, [1, -0.96], 'valid'), 256, sampleRate);
+filter = fir1(100, [0.07, 0.13], 'pass');
+%filter = fir1(100, 0.07, 'high');
+%filter = fir1(100, 0.13, 'low');
+audio = conv(audio, filter, 'valid');
+audio = audio.*2;
+%audio = (audio.^1.2)./max(audio);
+audiowrite('car2.wav', audio, sampleRate);
+specgram(audio, 256, sampleRate);
