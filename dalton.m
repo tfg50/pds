@@ -2,6 +2,7 @@ image = imread('dalton.bmp');
 R = image(:,:,1);
 G = image(:,:,2);
 B = image(:,:,3);
+% usei isso pra carregar as imagens de cada componente
 %imwrite(R, 'daltonR.bmp', 'bmp');
 %imwrite(G, 'daltonG.bmp', 'bmp');
 %imwrite(B, 'daltonB.bmp', 'bmp');

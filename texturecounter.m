@@ -4,7 +4,7 @@ image = imread('alumgrns.bmp');
 %gray = rgb2gray(image);
 gray = image;
 
-%border detection
+% deteccao de borda
 sobelX = [[-1, 0, 1]; [-2, 0, 2]; [-1, 0, 1]];
 sobelY = [[-1, -2, -1]; [0, 0, 0]; [1, 2, 1]];
 borderX = abs(conv2(double(gray), double(sobelX), 'same'));
@@ -13,7 +13,7 @@ border = sqrt(borderX.*borderX + borderY.*borderY);
 figure();
 imshow(gray);
 border_threshold = 20;
-%initializing DSU
+% inicializando dsu
 n = size(gray, 1);
 m = size(gray, 2);
 for i = 1:n
@@ -67,9 +67,10 @@ function y = makeUnion(a, b)
   y = true;
 endfunction
 
-%algorithm
+% algoritmo
 for i = 1:n
   for j = 1:m
+    % conectar
     if(j > 1 && border(i, j) < threshold && border(i, j-1) < threshold)
       makeUnion((i-1)*m + j, (i-1)*m + j - 1);
     endif
@@ -79,7 +80,7 @@ for i = 1:n
   endfor
 endfor
 
-%getting collor
+% pegando cor das componentes
 ans = 0;
 cor = zeros(n * m, 1);
 for i = 1:(n*m)

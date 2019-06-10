@@ -3,6 +3,7 @@ image = imread('lena_rings.bmp');
 %no octave ja vem gray
 %gray = rgb2gray(image);
 gray = image;
+% filtros diretos
 imwrite(uint8(conv2(double(gray), mean(3), 'valid')), 'lena_mean3.bmp', 'bmp');
 imwrite(uint8(conv2(double(gray), mean(5), 'valid')), 'lena_mean5.bmp', 'bmp');
 imwrite(uint8(conv2(double(gray), gaussian2d(3, 2), 'valid')), 'lena_gauss.bmp', 'bmp');
